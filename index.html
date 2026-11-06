@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#10262b">
+  <meta name="description" content="跨境电商多平台订单数据分析看板，支持 CSV 导入、销售利润和市场表现分析。">
+  <title>跨境罗盘 · 多平台数据分析</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">✦</span><span>跨境罗盘<small>COMMERCE INTELLIGENCE</small></span></div>
+      <div class="nav-caption">工作台</div>
+      <nav aria-label="主导航">
+        <a class="nav-link active" href="#overview"><span>◫</span> 总览看板</a>
+        <a class="nav-link" href="#markets"><span>◎</span> 市场与渠道</a>
+        <a class="nav-link" href="#products"><span>▦</span> 商品表现</a>
+        <a class="nav-link" href="#data"><span>↥</span> 数据管理</a>
+      </nav>
+      <div class="sidebar-bottom"><div class="status-dot"></div><div><strong>本地分析模式</strong><small>导入文件仅在当前浏览器会话处理</small></div></div>
+    </aside>
+    <main class="main" id="overview">
+      <header class="topbar"><div class="breadcrumb">工作台 <span>/</span> 数据总览</div><div class="topbar-right"><span id="source-badge" class="source-badge">示例数据</span><span class="avatar">CB</span></div></header>
+      <div class="content">
+        <section class="hero"><div><div class="eyebrow">MULTI-CHANNEL ANALYTICS</div><h1>看清每一笔跨境生意</h1><p>把不同平台的订单放在同一张图里，快速找到增长、利润和市场机会。</p></div><div class="hero-actions"><button class="btn btn-ghost start-demo" type="button">▶ 自动演示</button><button id="download-template" class="btn btn-ghost" type="button">下载 CSV 模板</button><label class="btn btn-primary" for="file-input">↥ 导入订单 CSV</label><input id="file-input" type="file" accept=".csv,text/csv" hidden></div></section>
+        <section class="filters panel" aria-label="筛选条件"><div class="filter-title"><span class="filter-icon">⌕</span><div><strong>筛选视图</strong><small id="filter-count">全部订单</small></div></div><div class="filter-fields"><label>开始日期<input id="start-date" type="date"></label><label>结束日期<input id="end-date" type="date"></label><label>平台<select id="platform-filter"><option value="">全部平台</option></select></label><label>国家 / 地区<select id="country-filter"><option value="">全部国家 / 地区</option></select></label><button id="reset-filters" class="reset-btn" type="button">重置</button></div></section>
+        <div id="notice" class="notice" role="status" hidden></div>
+        <section class="section-heading"><div><div class="eyebrow muted">PERFORMANCE SNAPSHOT</div><h2>经营概览</h2></div><span id="period-label" class="period-label"></span></section>
+        <section class="kpi-grid" aria-label="关键指标">
+          <article class="kpi-card"><div class="kpi-top"><span>净销售额</span><span class="kpi-icon teal">＄</span></div><strong id="kpi-revenue">—</strong><small>扣除退款后的销售额 · USD</small></article>
+          <article class="kpi-card"><div class="kpi-top"><span>估算利润</span><span class="kpi-icon blue">↗</span></div><strong id="kpi-profit">—</strong><small>销售额 − 商品 / 物流 / 广告 / 平台费用</small></article>
+          <article class="kpi-card"><div class="kpi-top"><span>订单数</span><span class="kpi-icon amber">▣</span></div><strong id="kpi-orders">—</strong><small>按平台 + 订单编号去重</small></article>
+          <article class="kpi-card"><div class="kpi-top"><span>利润率</span><span class="kpi-icon violet">%</span></div><strong id="kpi-margin">—</strong><small>估算利润 ÷ 净销售额</small></article>
+        </section>
+        <section class="chart-grid"><article class="panel trend-panel"><div class="panel-head"><div><h3>销售与利润趋势</h3><p>按日期汇总 · USD</p></div><div class="legend"><span><i class="legend-revenue"></i>净销售额</span><span><i class="legend-profit"></i>估算利润</span></div></div><div id="trend-chart" class="trend-chart"></div></article><article class="panel mix-panel"><div class="panel-head"><div><h3>平台贡献</h3><p>净销售额占比</p></div></div><div id="platform-chart"></div></article></section>
+        <section id="markets" class="section-heading"><div><div class="eyebrow muted">MARKET OPPORTUNITIES</div><h2>市场与渠道</h2></div><span class="section-hint">比较不同地区的销售质量</span></section>
+        <section class="bottom-grid"><article class="panel"><div class="panel-head"><div><h3>国家 / 地区表现</h3><p>按净销售额排序</p></div></div><div id="country-chart" class="bar-list"></div></article><article class="panel insight-panel"><div class="panel-head"><div><h3>经营信号</h3><p>从当前筛选结果自动计算</p></div></div><div id="insights" class="insights"></div></article></section>
+        <section id="products" class="section-heading"><div><div class="eyebrow muted">PRODUCT PERFORMANCE</div><h2>商品表现</h2></div><button id="export-filtered" class="text-button" type="button">导出筛选结果 ↗</button></section>
+        <section class="panel table-panel"><div class="panel-head"><div><h3>热销商品</h3><p>按 SKU 汇总，利润已折算为 USD</p></div><span id="sku-count" class="subtle-pill"></span></div><div class="table-wrap"><table><thead><tr><th>商品 / SKU</th><th>销量</th><th>净销售额</th><th>估算利润</th><th>利润率</th></tr></thead><tbody id="product-body"></tbody></table></div></section>
+        <section id="data" class="data-panel"><div><div class="eyebrow muted">DATA WORKSPACE</div><h2>使用自己的订单数据</h2><p>支持 Amazon、Shopify、TikTok Shop 等多平台导出文件汇总。每行是一条订单商品记录；使用 <code>fx_to_usd</code> 把非美元金额折算为 USD。缺少汇率的非美元记录会跳过。</p><div id="data-quality" class="data-quality"></div></div><div class="data-actions"><button class="btn btn-dark start-demo" type="button">▶ 自动演示一遍</button><label class="btn btn-ghost" for="file-input">导入 CSV 文件</label><button id="restore-demo" class="text-button" type="button">恢复示例数据</button></div></section>
+        <footer>跨境罗盘 · 数据仅在当前浏览器会话处理 · 指标为经营分析用途</footer>
+      </div>
+    </main>
+  </div>
+  <div id="demo-guide" class="demo-guide" role="status" aria-live="polite" hidden><div class="demo-guide-top"><span id="demo-step">操作演示</span><button id="close-demo" type="button" aria-label="结束演示">×</button></div><strong id="demo-title"></strong><p id="demo-description"></p><div class="demo-progress"><span id="demo-progress-fill"></span></div></div>
+  <script src="./app.js"></script>
+</body>
+</html>

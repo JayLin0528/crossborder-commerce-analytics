@@ -1,0 +1,7 @@
+order_id,date,platform,country,sku,product,quantity,currency,revenue,product_cost,shipping_cost,ad_spend,platform_fee,refund_amount,fx_to_usd
+DEMO-001,2026-11-01,Amazon,美国,SKU-001,便携咖啡机,2,USD,178,86,12,10,20,0,1
+DEMO-002,2026-11-01,Shopify,英国,SKU-002,旅行收纳套装,3,GBP,90,30,8,5,4,0,1.25
+DEMO-003,2026-11-02,TikTok Shop,德国,SKU-003,户外露营灯,1,EUR,58,23,6,8,6,0,1.10
+DEMO-004,2026-11-02,eBay,加拿大,SKU-004,智能保温杯,2,CAD,132,54,12,7,13,0,0.74
+DEMO-005,2026-11-03,Amazon,澳大利亚,SKU-005,宠物饮水机,1,AUD,108,46,10,6,12,0,0.66
+DEMO-006,2026-11-03,Shopify,法国,SKU-006,无线充电器,4,EUR,156,52,9,12,7,39,1.10

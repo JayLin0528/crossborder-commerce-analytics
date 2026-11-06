@@ -1,0 +1,12 @@
+{
+  "name": "crossborder-commerce-analytics",
+  "version": "1.0.0",
+  "private": false,
+  "description": "A browser-based multi-platform cross-border e-commerce analytics dashboard",
+  "scripts": {
+    "test": "node --test tests/analytics.test.cjs tests/demo.test.cjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
