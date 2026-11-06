@@ -2,6 +2,8 @@
 
 一个可直接运行的跨境电商订单分析看板。它将 Amazon、Shopify、TikTok Shop、eBay 等平台的订单汇总到同一口径，帮助运营人员查看销售、利润、市场和商品表现。
 
+**[在线体验 App](https://jaylin0528.github.io/crossborder-commerce-analytics/)**
+
 > 当前版本是前端原型。所有数据在浏览器本地处理；没有平台 API 对接、账号系统或服务器存储。
 
 ## 快速体验
